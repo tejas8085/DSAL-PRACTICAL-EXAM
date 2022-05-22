@@ -1,78 +1,138 @@
-#include <iostream>
-using namespace std;
+#include<iostream>
+	using namespace std;
+	
 
-struct node{
-	string data;
-	int count;
-	node *child[10];
-};
+	class Office
+	{
+	    int n;
+	    int a[10][10];
+	    string office[10];
+	
 
-class Book{
 	public:
-		node *root;
-		Book(){
-			root=NULL;
-		}
-		void create();
-		void display();
-};
+	    void input();
+	    void display();
+	    void Prims();
+	};
+	
 
-void Book::create(){
-	int i,j,k;
-	root=new node;
-	cout<<"ENTER BOOK NAME- ";
-	cin>>root->data;
-	cout<<"HOW MANY CHAPTERS-";
-	cin>>root->count;
-	for(i=0;i<root->count;i++){
-		cout<<"ENTER CHAPTER "<<i+1<<" NAME- ";
-		root->child[i]=new node;
-		cin>>root->child[i]->data;
-		cout<<"HOW MANY SECTIONS-";
-		cin>>root->child[i]->count;
-		for(j=0;j<root->child[i]->count;j++){
-			cout<<"ENTER SECTION "<<j+1<<" NAME-: ";
-			root->child[i]->child[j]=new node;
-			cin>>root->child[i]->child[j]->data;
-			
+	void Office::input()
+	{
+	    cout<<"\nEnter no. of offices: ";
+	    cin>>n;
+	    cout<<"\nEnter the names of offices: ";
+	    for(int i=0 ; i<n ; i++){
+		
+	        cin >> office[i];
 		}
-	}
-}
 
-void Book::display(){
-	int i,j,k;
-	cout<<"BOOK NAME-: "<<root->data<<"\n";
-	for(i=0;i<root->count;i++){
-		cout<<"CHAPTER "<<i+1<<"- "<<root->child[i]->data<<"\n";
-		for(j=0;j<root->child[i]->count;j++){
-			cout<<"SECTIONS "<<j+1<<"- "<<root->child[i]->child[j]->data<<"\n";
-		}
-	}
-}
+	    cout<<"\nEnter the cost to connect the offices: ";
+	    for(int i=0 ; i<n ; i++){
+		
+	        for(int j=i ; j<n ; j++)
+	        {
+	            if(i==j)
+	            {
+	                a[i][j] = 0;
+	                continue;
+	            }
+	
 
-int main(){
-	Book b;
-	int choice;
-	while(choice!=3){
-		cout<<"\tMAIN MENU\n";
-		cout<<"1.CREATE\n2.DISPLAY\n3.EXIT\n";
-		cout<<"ENTER YOUR CHOICE-:";
-		cin>>choice;
-		switch(choice){
-			case 1:
-				b.create();
-				break;
-			
-			case 2:
-				b.display();
-				break;
-			
-			case 3:
-				break;
-			
-			default:
-				cout<<"Wrong choice";
-		}
+	            cout<<"\nEnter the cost to connect " << office[i] <<" and " << office[j]<< " : ";
+	            cin >> a[i][j];
+	            a[j][i] = a[i][j];
+	     }   }
 	}
-	return 0;
-}
+	
+
+	void Office::display()
+	{
+	
+
+	    for(int i=0 ; i<n ; i++)
+	    {
+	        cout<<"\n";
+	        for(int j=0 ; j<n ; j++)
+	        {
+	            cout<<a[i][j] << "\t";
+	        }
+	   }
+	}
+	
+
+	void Office::Prims()
+	{
+	    int visit[n], minCost=0, count=1, minIndex, cost=0;
+	    for(int i=0 ; i<n ; i++){
+		
+	        visit[i] = 0;
+		}
+
+	    cout<<"\n\nShortest path: ";
+	    visit[0]=1;
+	    cout<<office[0] << " -> ";
+	    while(1)
+	    {
+	        minCost = 10000;
+	        for(int i=0 ; i<n ; i++)
+	        {
+	            for(int j=0 ; j<n ; j++)
+	            {
+	                if(visit[i]==1 && a[i][j]!=0 && a[i][j]< minCost && visit[j]==0)
+	                {
+	                    minCost = a[i][j];
+	                    minIndex = j;
+	                }
+	            }
+	        }
+	        visit[minIndex]=1;
+	        cout<<office[minIndex] << " -> ";
+	        cost = cost + minCost;
+	        count++;
+	
+
+	        if(count==n){
+			
+	            break;
+	   		 }
+		}
+	
+
+	    cout<<"\nMinimum cost: "<<cost;
+	
+
+	}
+	
+
+	int main()
+	{
+	    Office o1;
+	    int choice;
+	MENU:
+	    cout<<"\n\nMINIMUM SPANNING TREE";
+	    cout<<"\n1. Input data";
+	    cout<<"\n2. Display data";
+	    cout<<"\n3. Calculate minimum cost";
+	    cout<<"\n4. Exit";
+	    cout<<"\nEnter your choice: ";
+	    cin >> choice;
+	    switch(choice)
+	    {
+	    case 1:
+	    	o1.input();
+	    	break;
+	    case 2:
+	    	o1.display();
+	    	break;
+	    case 3:
+	    	o1.Prims();
+	    	break;
+	    case 4:
+	    	return 0;
+	    default:
+	    	cout<<"\nInvalid choice.Try again!";
+	    }
+	    if(choice != 5)
+	    	goto MENU;
+	    return 0;
+	}

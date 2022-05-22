@@ -1,14 +1,19 @@
 /*
-Experiment 13 : Represent a given grapg using adjacency matrix/list to perform DFS and using adjacency list to perform BFS. 
-                Use the map of the area around the college as a graph. Identify the prominent land marks as nodes and perform DFS and BFS on that.
-Adjecency List
+Represent a given graph using adjacency matrix/list to perform DFS and using adjacency list to perform BFS. Use the map of the area around the college as the graph. Identify the prominent land marks as nodes and perform DFS and BFS on that.
 
 
       QUESTIONS
 
 1. Graph ---> 
-    A Graph is a non-linear data structure consisting of nodes and edges. The nodes       are sometimes also referred to as vertices and the edges are lines or arcs that       connect any two nodes in the graph. More formally a Graph can be defined as,
-    A Graph consists of a finite set of vertices(or nodes) and set of Edges which       connect a pair of nodes.
+    A Graph is a non-linear data structure consisting of nodes and edges. The nodes are sometimes also referred to as vertices and the edges are lines or arcs that connect any two nodes in the graph. More formally a Graph can be defined as, A Graph consists of a finite set of vertices(or nodes) and set of Edges which connect a pair of nodes.
+
+2. BFS --->
+    Breadth-first search is a graph traversal algorithm that starts traversing the graph from the root node and explores all the neighboring nodes. Then, it selects the nearest node and explores all the unexplored nodes. While using BFS for traversal, any node in the graph can be considered as the root node.
+
+3. DFS ---> 
+    The Depth First Search (DFS) is an algorithm for traversing or searching tree or graph data structures which uses the idea of backtracking. It explores all the nodes by going forward if possible or uses backtracking.
+
+
 */
 
 #include <iostream>
